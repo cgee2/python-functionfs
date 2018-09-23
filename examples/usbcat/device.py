@@ -68,9 +68,9 @@ class USBCat(functionfs.Function):
         self._onCannotSend = onCannotSend
         self._stranded_list = []
 
-    def close(self):
+    def __exit__(self, exc_type, exc_value, traceback):
         self._onCannotSend()
-        super(USBCat, self).close()
+        super(USBCat, self).__exit__(exc_type, exc_value, traceback)
 
     def onBind(self):
         trace('onBind')
